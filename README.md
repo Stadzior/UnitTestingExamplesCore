@@ -1,4 +1,4 @@
-# UnitTestingExamplesCpre
+# UnitTestingExamplesCore
 ## Examples presenting various solutions to unit testing real life problems on ASP.NET Core & MSSQL.
 
 Isolation
