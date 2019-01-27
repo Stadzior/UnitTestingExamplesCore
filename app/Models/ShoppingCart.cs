@@ -9,9 +9,8 @@ namespace app.Models
     public class ShoppingCart : List<Product>
     {
         public double Balance => this.Sum(x => x.Price);
-
         private Payment payment;
-        
+
         public ShoppingCart()
         {
             payment = new Payment(this);

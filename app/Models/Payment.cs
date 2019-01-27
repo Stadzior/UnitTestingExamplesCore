@@ -35,5 +35,13 @@ namespace app.Models
                 context.SaveChanges();
             }
         }
+
+        public double GetProductQuantity(int productId)
+        {
+            using (var context = new ApplicationDbContext(new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>()))
+            {
+                return context.Products.Single(x => x.Id == productId).Quantity;
+            }
+        }
     }
 }
