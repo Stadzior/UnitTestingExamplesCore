@@ -1,4 +1,5 @@
 ﻿using app.Services;
+using System;
 
 namespace app.Models
 {
@@ -18,6 +19,8 @@ namespace app.Models
 
         public void Checkout()
         {
+            if (IsVip)
+                Console.WriteLine("You're V.I.P");
             shoppingCart.Checkout(this);
         }
     }
