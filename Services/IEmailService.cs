@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace app.Services
 {
-    public interface ISmsSender
+    public interface IEmailService
     {
-        Task SendSmsAsync(string number, string message);
+        Task SendEmailAsync(string email, string subject, string message);
     }
 }

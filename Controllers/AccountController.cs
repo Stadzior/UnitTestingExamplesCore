@@ -20,8 +20,8 @@ namespace app.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
+        private readonly IEmailService _emailSender;
+        private readonly ISmsService _smsSender;
         private readonly ILogger _logger;
         private readonly string _externalCookieScheme;
 
@@ -29,8 +29,8 @@ namespace app.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IOptions<IdentityCookieOptions> identityCookieOptions,
-            IEmailSender emailSender,
-            ISmsSender smsSender,
+            IEmailService emailSender,
+            ISmsService smsSender,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
