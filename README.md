@@ -1,5 +1,15 @@
 # UnitTestingExamplesCore
 ## Examples presenting various solutions to unit testing real life problems on ASP.NET Core & MSSQL.
+### How to run the app:
+- install docker and go into the project directory with your favourite cmd line and use `docker-compose up`
+
+or
+
+- install your favourite IDE
+- install MSSQL server instance and configure it to match the connection string from **Startup.cs**
+- go into the project directory with your favorite cmd line and use `update-database` to run the migrations
+- configure server for the web app
+- build and deploy the app
 
 Isolation
 
