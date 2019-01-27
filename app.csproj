@@ -5,8 +5,15 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <UserSecretsId>aspnet-app-78AB4BAD-E955-4E2D-9740-B328F23A5D97</UserSecretsId>
   </PropertyGroup>
+
   <ItemGroup>
-    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" />
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="app.db" />
+    <None Remove="docker-compose.yml" />
+    <None Remove="Dockerfile" />
+    <None Remove="entrypoint.sh" />
+    <None Remove="README.md" />
   </ItemGroup>
 
   <ItemGroup>
