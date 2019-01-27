@@ -3,7 +3,7 @@ using System;
 
 namespace app.Models
 {
-    public class User
+    public class Customer
     {
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -12,7 +12,7 @@ namespace app.Models
 
         private ShoppingCart shoppingCart;
 
-        public User()
+        public Customer()
         {
             shoppingCart = new ShoppingCart();
         }
@@ -21,6 +21,7 @@ namespace app.Models
         {
             if (IsVip)
                 Console.WriteLine("You're V.I.P");
+            //Some complex logic
             shoppingCart.Checkout(this);
         }
     }

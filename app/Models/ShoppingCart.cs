@@ -14,26 +14,22 @@ namespace app.Models
         
         public ShoppingCart()
         {
-            payment = new Payment();
+            payment = new Payment(this);
         }
 
-        public void Checkout(User user)
+        public void Checkout(Customer user)
         {
             if (user.IsVip)
-                ApplyDiscount();
+                payment.ApplyDiscount();
 
             if (Balance > user.Balance)
-                payment.Execute();
-            else
-                payment.RollBack();
-        }
-
-        public void ApplyDiscount()
-        {
-            foreach (var product in this)
             {
-                product.Price *= 0.8;
+                payment.Execute();
+                user.Balance -= Balance;
+                Clear();
             }
+            else
+                Console.WriteLine("No money, no deal.");
         }
     }
 }
