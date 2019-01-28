@@ -10,17 +10,20 @@ namespace app.Models
         public double Balance { get; set; }
         public virtual bool IsVip { get; set; }
 
+        public virtual IOutputService OutputService { get; set; }
+
         private ShoppingCart shoppingCart;
 
         public Customer()
         {
+            OutputService = OutputService ?? new ConsoleOutputService();
             shoppingCart = new ShoppingCart();
         }
 
         public void Checkout()
         {
             if (IsVip)
-                Console.WriteLine("You're V.I.P");
+                OutputService.WriteLine("You're V.I.P");
             //Some complex logic
             ShoppingCartCheckout();
         }

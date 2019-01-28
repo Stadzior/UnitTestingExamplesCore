@@ -1,4 +1,5 @@
 ﻿using app.Models;
+using app.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,11 @@ namespace app.Models
         public double Balance => this.Sum(x => x.Price);
         private Payment payment;
 
+        IOutputService OutputService { get; set; }
+
         public ShoppingCart()
         {
+            OutputService = OutputService ?? new ConsoleOutputService();
             payment = new Payment(this);
         }
 
@@ -28,7 +32,7 @@ namespace app.Models
                 Clear();
             }
             else
-                Console.WriteLine("No money, no deal.");
+                OutputService.WriteLine("No money, no deal.");
         }
     }
 }
