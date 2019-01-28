@@ -24,7 +24,6 @@ namespace app.Models
         {
             if (IsVip)
                 OutputService.WriteLine("You're V.I.P");
-            //Some complex logic
             ShoppingCartCheckout();
         }
 

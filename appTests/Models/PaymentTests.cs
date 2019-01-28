@@ -10,14 +10,18 @@ namespace appTests.Models
     [TestFixture]
     public class PaymentTests
     {
-        private ShoppingCart cart = new ShoppingCart
+        private static object[] _applyDiscountSource =
         {
-            new Product { Id = 1, Name = "FunnyItem", Price = 100.0, Quantity = 2, },
-            new Product { Id = 2, Name = "LessFunnyItem", Price = 10.0, Quantity = 1 },
+            new TestCaseData(new ShoppingCart(), 0.0).SetName("ApplyDiscount_NoItem_BalanceIsEqualTo0"),
+            new TestCaseData(new ShoppingCart
+            {
+                new Product { Id = 1, Name = "FunnyItem", Price = 100.0, Quantity = 2, },
+                new Product { Id = 2, Name = "LessFunnyItem", Price = 10.0, Quantity = 1 }
+            }, 88.0).SetName("ApplyDiscount_TwoItemsFor110_BalanceIsEqualTo88")
         };
 
-        [TestCase(88.0)]
-        public void ApplyDiscountTest(double expectedResult)
+        [TestCaseSource(nameof(_applyDiscountSource))]
+        public void ApplyDiscountTest(ShoppingCart cart, double expectedResult)
         {
             //Arrange
             var payment = new Payment(cart);
@@ -29,8 +33,18 @@ namespace appTests.Models
             Assert.AreEqual(expectedResult, cart.Balance);
         }
 
-        [TestCase(70.4)]
-        public void ApplyDiscountTwiceTest(double expectedResult)
+        private static object[] _applyDiscountTwiceSource =
+        {
+            new TestCaseData(new ShoppingCart(), 0.0).SetName("ApplyDiscount_NoItem_BalanceIsEqualTo0"),
+            new TestCaseData(new ShoppingCart
+            {
+                new Product { Id = 1, Name = "FunnyItem", Price = 100.0, Quantity = 2, },
+                new Product { Id = 2, Name = "LessFunnyItem", Price = 10.0, Quantity = 1 }
+            }, 70.4).SetName("ApplyDiscount_TwoItemsFor110_BalanceIsEqualTo70.4")
+        };
+
+        [TestCaseSource(nameof(_applyDiscountTwiceSource))]
+        public void ApplyDiscountTwiceTest(ShoppingCart cart, double expectedResult)
         {
             //Arrange
             var payment = new Payment(cart);
