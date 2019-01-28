@@ -19,7 +19,11 @@ namespace appTests.Models
         [TestCase]
         public void CtorTest()
         {
+            //Arrange
+            //Act
             var payment = new Payment(cart);
+            
+            //Assert
             var actualCart = payment.GetType().GetField("shoppingCart", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(payment);
             Assert.AreSame(cart, actualCart);
         }
@@ -27,17 +31,27 @@ namespace appTests.Models
         [TestCase(88.0)]
         public void ApplyDiscountTest(double expectedResult)
         {
+            //Arrange
             var payment = new Payment(cart);
+
+            //Act
             payment.ApplyDiscount();
+
+            //Assert
             Assert.AreEqual(expectedResult, cart.Balance);
         }
 
         [TestCase(70.4)]
         public void ApplyDiscountTwiceTest(double expectedResult)
         {
+            //Arrange
             var payment = new Payment(cart);
+
+            //Act
             payment.ApplyDiscount();
             payment.ApplyDiscount();
+
+            //Assert
             Assert.AreEqual(expectedResult, cart.Balance);
         }
     }
