@@ -5,7 +5,7 @@
 
 or
 
-- install your favourite IDE
+- install your favorite IDE
 - install MSSQL server instance and configure it to match the connection string from **Startup.cs**
 - go into the project directory with your favorite cmd line and use `update-database` to run the migrations
 - configure server for the web app
@@ -36,3 +36,5 @@ Limited arrangement
 "New is glue"
 
 Dependency breaking techniques
+
+Avoiding calls to static classes
