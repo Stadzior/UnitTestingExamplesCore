@@ -12,12 +12,11 @@ namespace app.Models
 
         public virtual IOutputService OutputService { get; set; }
 
-        private ShoppingCart shoppingCart;
+        public ShoppingCart ShoppingCart { get; set; }
 
         public Customer()
         {
             OutputService = OutputService ?? new ConsoleOutputService();
-            shoppingCart = new ShoppingCart();
         }
 
         public void Checkout()
@@ -29,7 +28,7 @@ namespace app.Models
 
         protected virtual void ShoppingCartCheckout()
         {
-            shoppingCart.Checkout(this);
+            ShoppingCart.Checkout(this);
         }
     }
 }

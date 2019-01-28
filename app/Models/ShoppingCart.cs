@@ -10,25 +10,24 @@ namespace app.Models
     public class ShoppingCart : List<Product>
     {
         public double Balance => this.Sum(x => x.Price);
-        private Payment payment;
+        public Payment Payment { get; set; }
 
         IOutputService OutputService { get; set; }
 
         public ShoppingCart()
         {
             OutputService = OutputService ?? new ConsoleOutputService();
-            payment = new Payment(this);
         }
 
-        public void Checkout(Customer user)
+        public void Checkout(Customer customer)
         {
-            if (user.IsVip)
-                payment.ApplyDiscount();
+            if (customer.IsVip)
+                Payment.ApplyDiscount();
 
-            if (Balance > user.Balance)
+            if (Balance > customer.Balance)
             {
-                payment.Execute();
-                user.Balance -= Balance;
+                Payment.Execute();
+                customer.Balance -= Balance;
                 Clear();
             }
             else

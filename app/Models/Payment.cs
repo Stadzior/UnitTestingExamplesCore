@@ -5,16 +5,16 @@ namespace app.Models
 {
     public class Payment
     {
-        private ShoppingCart shoppingCart;
+        public ShoppingCart ShoppingCart { get; set; }
 
         public Payment(ShoppingCart cart)
         {
-            shoppingCart = cart;
+            ShoppingCart = cart;
         }
 
         public void ApplyDiscount()
         {
-            foreach (var product in shoppingCart)
+            foreach (var product in ShoppingCart)
             {
                 product.Price *= 0.8;
             }
@@ -25,7 +25,7 @@ namespace app.Models
             using (var context = new ApplicationDbContext(new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>()))
             {
                 var productsInDb = context.Products
-                    .Where(x => shoppingCart
+                    .Where(x => ShoppingCart
                     .Any(y => y.Id == x.Id));
 
                 foreach (var product in productsInDb)
