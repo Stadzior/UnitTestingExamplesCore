@@ -8,7 +8,7 @@ namespace app.Models
         public int Id { get; set; }
         public string UserName { get; set; }
         public double Balance { get; set; }
-        public bool IsVip { get; set; }
+        public virtual bool IsVip { get; set; }
 
         private ShoppingCart shoppingCart;
 
@@ -22,6 +22,11 @@ namespace app.Models
             if (IsVip)
                 Console.WriteLine("You're V.I.P");
             //Some complex logic
+            ShoppingCartCheckout();
+        }
+
+        protected virtual void ShoppingCartCheckout()
+        {
             shoppingCart.Checkout(this);
         }
     }
