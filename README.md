@@ -38,3 +38,5 @@ Limited arrangement
 Dependency breaking techniques
 
 Avoiding calls to static classes
+
+Extract & override
