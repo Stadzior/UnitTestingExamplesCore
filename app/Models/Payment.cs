@@ -7,9 +7,12 @@ namespace app.Models
     {
         public ShoppingCart ShoppingCart { get; set; }
 
+        public IApplicationDbContextFactory ApplicationDbContextFactory { get; set; }
+
         public Payment(ShoppingCart cart)
         {
             ShoppingCart = cart;
+            ApplicationDbContextFactory = ApplicationDbContextFactory ?? new ApplicationDbContextFactory();
         }
 
         public void ApplyDiscount()
@@ -22,15 +25,19 @@ namespace app.Models
 
         public void Execute()
         {
-            using (var context = new ApplicationDbContext(new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>()))
+            using (var context = ApplicationDbContextFactory.Create())
             {
                 var productsInDb = context.Products
                     .Where(x => ShoppingCart
                     .Any(y => y.Id == x.Id));
 
-                foreach (var product in productsInDb)
+                foreach (var productId in ShoppingCart.Select(x => x.Id))
                 {
-                    product.Quantity--;
+                    ShoppingCart.Single(x => x.Id == productId).Quantity--;
+
+                    var productInDb = productsInDb.SingleOrDefault(x => x.Id == productId);
+                    if (productInDb != null)
+                        productInDb.Quantity--;
                 }
                 context.SaveChanges();
             }
@@ -38,7 +45,7 @@ namespace app.Models
 
         public double GetProductQuantity(int productId)
         {
-            using (var context = new ApplicationDbContext(new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>()))
+            using (var context = ApplicationDbContextFactory.Create())
             {
                 return context.Products.Single(x => x.Id == productId).Quantity;
             }
