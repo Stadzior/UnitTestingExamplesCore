@@ -11,7 +11,7 @@ namespace appTests.Models
     {
         [TestCase(true, 1, TestName = "Checkout_VipCustomer_CheckoutPerformedAndMessageDisplayed")]
         [TestCase(false, 0, TestName = "Checkout_AverageCustomer_CheckoutPerformedAndMessageNotDisplayed")]
-        public void AverageCustomerCheckoutTest(bool isVip, int expectedMessageDisplayCount)
+        public void CheckoutTest(bool isVip, int expectedMessageDisplayCount)
         {
             //Arrange
             var customerPartialMock = new Mock<Customer>

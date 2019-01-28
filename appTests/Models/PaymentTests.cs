@@ -16,18 +16,6 @@ namespace appTests.Models
             new Product { Id = 2, Name = "LessFunnyItem", Price = 10.0, Quantity = 1 },
         };
 
-        [TestCase]
-        public void CtorTest()
-        {
-            //Arrange
-            //Act
-            var payment = new Payment(cart);
-            
-            //Assert
-            var actualCart = payment.GetType().GetField("shoppingCart", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(payment);
-            Assert.AreSame(cart, actualCart);
-        }
-
         [TestCase(88.0)]
         public void ApplyDiscountTest(double expectedResult)
         {
